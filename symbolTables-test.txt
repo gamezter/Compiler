@@ -1,0 +1,45 @@
+
+Symbol Table: global
+                Name|                Kind|                         Type|                Link|
+--------------------|--------------------|-----------------------------|--------------------|
+             Utility|               CLASS|                             |             Utility|
+             program|            FUNCTION|                        void||             program|
+           randomize|            FUNCTION|                       float||           randomize|
+
+Symbol Table: Utility
+                Name|                Kind|                         Type|                Link|
+--------------------|--------------------|-----------------------------|--------------------|
+                var1|            VARIABLE|     int[4][5][7][8][9][1][0]|                    |
+                var2|            VARIABLE|                        float|                    |
+             findMax|            FUNCTION|                 int|int[100]|             findMax|
+             findMin|            FUNCTION|                 int|int[100]|             findMin|
+
+Symbol Table: findMax
+                Name|                Kind|                         Type|                Link|
+--------------------|--------------------|-----------------------------|--------------------|
+               array|           PARAMETER|                     int[100]|                    |
+            maxValue|            VARIABLE|                          int|                    |
+                 idx|            VARIABLE|                          int|                    |
+
+Symbol Table: findMin
+                Name|                Kind|                         Type|                Link|
+--------------------|--------------------|-----------------------------|--------------------|
+               array|           PARAMETER|                     int[100]|                    |
+            minValue|            VARIABLE|                          int|                    |
+                 idx|            VARIABLE|                          int|                    |
+
+Symbol Table: program
+                Name|                Kind|                         Type|                Link|
+--------------------|--------------------|-----------------------------|--------------------|
+              sample|            VARIABLE|                     int[100]|                    |
+                 idx|            VARIABLE|                          int|                    |
+            maxValue|            VARIABLE|                          int|                    |
+            minValue|            VARIABLE|                          int|                    |
+             utility|            VARIABLE|                      Utility|                    |
+        arrayUtility|            VARIABLE|          Utility[2][3][6][7]|                    |
+                   t|            VARIABLE|                          int|                    |
+
+Symbol Table: randomize
+                Name|                Kind|                         Type|                Link|
+--------------------|--------------------|-----------------------------|--------------------|
+               value|            VARIABLE|                        float|                    |

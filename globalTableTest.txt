@@ -1,0 +1,22 @@
+class empty{};
+class notEmpty{    
+ 	int i[3]; int j; int k;     
+ 	float function1(int i){    
+ 		int j;    
+ 	};    
+};     
+class notEmpty2{    
+	notEmpty i; int j; int k;     
+ 	float function1(int i){    
+ 		int j;    
+ 	};    
+};     
+program{};     
+float function1(empty FreeFunctionVariable, float kja){   
+	notEmpty2 hello;   
+ 	hello.i.i = 0;   
+	//one error
+ 	hello.i.f = 0;    
+	//two error
+ 	hello.j.f = 0;    
+};

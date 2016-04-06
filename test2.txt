@@ -1,0 +1,47 @@
+class Foo1 {};
+class Foo2 {
+	unknowVarType i;
+};
+class Foo3 {
+	unknownFuncType func(){};
+	float func(float a) {};
+	int func(float a, foo b[3]) {
+		int i[2][4];
+	};
+};
+class Foo4 {
+	int array[4];
+	float floatNum;
+
+	float foo2(Unknown a, float b[3]) {
+		Foo f;
+		
+		f = 9.0;
+		a = b + c;
+		b = c * d / e;
+		c = d + not e and f;
+		d.a = d[1] <= g;
+		
+		if (isTrue(p, q)) then { 
+			d.b = (-d[2]) <> g;
+			e[1].d.c = e.param(a.c, b[2]);
+		} else {
+			e[-(9 + f(a, b, c))] = not a or 8 * h[1].i[2].j();
+			f[1].f[a and (b * c / not d)] = -6.66 + a[1 * (b[2][3].c(d))].b(p, q);
+		};
+		
+		return(1);
+	};
+};
+program { 
+	float a[1][2][3];
+	
+	while (not not not not true <> true) do {
+		if (c * d) then {
+			read(a.b[1]);
+		} else {
+			write(a <> b.c.d);
+		};
+	};		
+};
+void emptyFunc(){};

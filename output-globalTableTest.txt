@@ -1,0 +1,79 @@
+$ 
+prog 
+prog -> progBody classDeclList #newGlobal 
+Stack: $ progBody classDeclList #newGlobal 
+classDeclList -> classDeclList classDecl 
+Stack: $ progBody classDeclList classDecl 
+classDecl -> #exit ; } classBody { #newClass id #pushId class 
+Stack: $ progBody classDeclList #exit ; } classBody { #newClass id #pushId class 
+class = class
+id = empty
+{ = {
+classBody -> EPSILON 
+Stack: $ progBody classDeclList #exit ; } EPSILON 
+} = }
+; = ;
+classDeclList -> classDeclList classDecl 
+Stack: $ progBody classDeclList classDecl 
+classDecl -> #exit ; } classBody { #newClass id #pushId class 
+Stack: $ progBody classDeclList #exit ; } classBody { #newClass id #pushId class 
+class = class
+id = notEmpty
+{ = {
+classBody -> varOrFunc id #pushId type #pushType 
+Stack: $ progBody classDeclList #exit ; } varOrFunc id #pushId type #pushType 
+type -> int 
+Stack: $ progBody classDeclList #exit ; } varOrFunc id #pushId int 
+int = int
+id = i
+varOrFunc -> classBody ; #newVar arraySizeList 
+Stack: $ progBody classDeclList #exit ; } classBody ; #newVar arraySizeList 
+arraySizeList -> arraySizeList arraySize 
+Stack: $ progBody classDeclList #exit ; } classBody ; #newVar arraySizeList arraySize 
+arraySize -> ] inum #addDimension [ 
+Stack: $ progBody classDeclList #exit ; } classBody ; #newVar arraySizeList ] inum #addDimension [ 
+[ = [
+inum = 3
+] = ]
+arraySizeList -> EPSILON 
+Stack: $ progBody classDeclList #exit ; } classBody ; #newVar EPSILON 
+; = ;
+classBody -> varOrFunc id #pushId type #pushType 
+Stack: $ progBody classDeclList #exit ; } varOrFunc id #pushId type #pushType 
+type -> int 
+Stack: $ progBody classDeclList #exit ; } varOrFunc id #pushId int 
+int = int
+id = j
+varOrFunc -> classBody ; #newVar arraySizeList 
+Stack: $ progBody classDeclList #exit ; } classBody ; #newVar arraySizeList 
+arraySizeList -> EPSILON 
+Stack: $ progBody classDeclList #exit ; } classBody ; #newVar EPSILON 
+; = ;
+classBody -> varOrFunc id #pushId type #pushType 
+Stack: $ progBody classDeclList #exit ; } varOrFunc id #pushId type #pushType 
+type -> int 
+Stack: $ progBody classDeclList #exit ; } varOrFunc id #pushId int 
+int = int
+id = k
+varOrFunc -> classBody ; #newVar arraySizeList 
+Stack: $ progBody classDeclList #exit ; } classBody ; #newVar arraySizeList 
+arraySizeList -> EPSILON 
+Stack: $ progBody classDeclList #exit ; } classBody ; #newVar EPSILON 
+; = ;
+classBody -> varOrFunc id #pushId type #pushType 
+Stack: $ progBody classDeclList #exit ; } varOrFunc id #pushId type #pushType 
+type -> float 
+Stack: $ progBody classDeclList #exit ; } varOrFunc id #pushId float 
+float = float
+id = function1
+varOrFunc -> funcDefList #exit ; funcBody ) fParams ( #newFunc 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; funcBody ) fParams ( #newFunc 
+( = (
+fParams -> fParamsTailList #changeToParam #newVar arraySizeList id #pushId type #pushType 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; funcBody ) fParamsTailList #changeToParam #newVar arraySizeList id #pushId type #pushType 
+type -> int 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; funcBody ) fParamsTailList #changeToParam #newVar arraySizeList id #pushId int 
+int = int
+id = i
+arraySizeList -> EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; funcBody ) fParamsTailList #changeToParam #newVar EPSILON 
