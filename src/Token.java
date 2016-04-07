@@ -45,8 +45,8 @@ public class Token {
 				case 34: return GET;
 				case 35: return PUT;
 				case 36: return RETURN;
-				case 37: return PROGRAM;// mention in documentation
-				case 38: return EOF;// mention in documentation
+				case 37: return PROGRAM;
+				case 38: return EOF;
 				default: return ERROR;
 			}
 		}

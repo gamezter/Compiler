@@ -124,8 +124,8 @@ varOrStatement -> statementList ; expr assignOp variable1 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr = 
 = = =
@@ -159,8 +159,8 @@ Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; 
 ] = ]
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -210,8 +210,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -238,8 +238,8 @@ Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; 
 id = idx
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr = 
 = = =
@@ -256,8 +256,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 EPSILON 
 arithExpr1 -> arithExpr1 term addOp 
@@ -313,8 +313,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -322,8 +322,8 @@ Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; 
 ] = ]
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -344,8 +344,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -366,8 +366,8 @@ Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; 
 id = maxValue
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr = 
 = = =
@@ -398,8 +398,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -407,8 +407,8 @@ Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; 
 ] = ]
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -450,8 +450,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; ) expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -510,8 +510,8 @@ varOrStatement -> statementList ; expr assignOp variable1 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr = 
 = = =
@@ -545,8 +545,8 @@ Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; 
 ] = ]
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -596,8 +596,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -624,8 +624,8 @@ Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; 
 id = idx
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr = 
 = = =
@@ -649,8 +649,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 ) arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 ) arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 ) arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 ) arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 ) arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -711,8 +711,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -720,8 +720,8 @@ Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; 
 ] = ]
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -742,8 +742,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else statBlock then ) arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -764,8 +764,8 @@ Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; 
 id = minValue
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr = 
 = = =
@@ -796,8 +796,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -805,8 +805,8 @@ Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; 
 ] = ]
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; } statementList ; statBlock else } statementList ; expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -848,8 +848,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ progBody classDeclList #exit ; } funcDefList #exit ; } statementList ; ) expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -995,8 +995,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; statBlock ) assignStat ; arithExpr relOp arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -1023,8 +1023,8 @@ Stack: $ funcDefList #exit ; } statementList ; statBlock ) expr assignOp variabl
 id = t
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; statBlock ) expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; statBlock ) expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; statBlock ) expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ funcDefList #exit ; } statementList ; statBlock ) expr = 
 = = =
@@ -1041,8 +1041,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; statBlock ) expr1 arithExpr1 EPSILON 
 arithExpr1 -> arithExpr1 term addOp 
@@ -1090,8 +1090,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; ) variable1 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; ) variable1 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; } statementList ; ) variable1 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; } statementList ; ) variable1 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; ) variable1 #checkId indiceList ] #addShallowDimension arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -1099,8 +1099,8 @@ Stack: $ funcDefList #exit ; } statementList ; } statementList ; ) variable1 #ch
 ] = ]
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; ) variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; } statementList ; ) #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; } statementList ; ) #currentScope #exitScope EPSILON 
 ) = )
 ; = ;
 statementList -> statementList statement 
@@ -1128,8 +1128,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr assignOp variable1 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr assignOp variable1 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr assignOp variable1 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr assignOp variable1 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr assignOp variable1 #checkId indiceList ] #addShallowDimension arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -1137,8 +1137,8 @@ Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr assignOp v
 ] = ]
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr = 
 = = =
@@ -1176,8 +1176,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 factor2 #checkId indiceList ] #addShallowDimension arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -1185,8 +1185,8 @@ Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr
 ] = ]
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> term1 factor multOp 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 factor multOp 
 multOp -> * 
@@ -1195,11 +1195,11 @@ Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr
 factor -> factor1 id #pushId 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 factor1 id #pushId 
 id = randomize
-factor1 -> #checkFunc ) aParams #currentScope ( 
-Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 #checkFunc ) aParams #currentScope ( 
+factor1 -> #checkFunc ) #exitScope aParams #currentScope ( 
+Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 #checkFunc ) #exitScope aParams #currentScope ( 
 ( = (
 aParams -> EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 #checkFunc ) EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 term1 #checkFunc ) #exitScope EPSILON 
 ) = )
 term1 -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; } statementList ; expr1 arithExpr1 term1 ) arithExpr1 EPSILON 
@@ -1228,8 +1228,8 @@ Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId 
 id = maxValue
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ funcDefList #exit ; } statementList ; expr = 
 = = =
@@ -1250,34 +1250,34 @@ factor2 -> factor1 id #pushId .
 Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 factor1 id #pushId . 
 . = .
 id = findMax
-factor1 -> #checkFunc ) aParams #currentScope ( 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParams #currentScope ( 
+factor1 -> #checkFunc ) #exitScope aParams #currentScope ( 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParams #currentScope ( 
 ( = (
 aParams -> aParamsTailList #addShallowParam expr 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr 
 expr -> expr1 arithExpr 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor 
 factor -> factor1 id #pushId 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor1 id #pushId 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor1 id #pushId 
 id = sample
 factor1 -> factor2 #checkId indiceList 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor2 #checkId indiceList 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term1 #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor2 #checkId EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 EPSILON 
 expr1 -> EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam EPSILON 
 aParamsTailList -> EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope EPSILON 
 ) = )
 term1 -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 EPSILON 
@@ -1297,8 +1297,8 @@ Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId 
 id = minValue
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ funcDefList #exit ; } statementList ; expr = 
 = = =
@@ -1319,34 +1319,34 @@ factor2 -> factor1 id #pushId .
 Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 factor1 id #pushId . 
 . = .
 id = findMin
-factor1 -> #checkFunc ) aParams #currentScope ( 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParams #currentScope ( 
+factor1 -> #checkFunc ) #exitScope aParams #currentScope ( 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParams #currentScope ( 
 ( = (
 aParams -> aParamsTailList #addShallowParam expr 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr 
 expr -> expr1 arithExpr 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor 
 factor -> factor1 id #pushId 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor1 id #pushId 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor1 id #pushId 
 id = sample
 factor1 -> factor2 #checkId indiceList 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor2 #checkId indiceList 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 term1 #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term1 factor2 #checkId EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 arithExpr1 EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam expr1 EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam expr1 EPSILON 
 expr1 -> EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) aParamsTailList #addShallowParam EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope aParamsTailList #addShallowParam EPSILON 
 aParamsTailList -> EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 term1 #checkFunc ) #exitScope EPSILON 
 ) = )
 term1 -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; expr1 arithExpr1 EPSILON 
@@ -1491,8 +1491,8 @@ Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId 
 ] = ]
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ funcDefList #exit ; } statementList ; expr = 
 = = =
@@ -1716,8 +1716,8 @@ Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId 
 ] = ]
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ funcDefList #exit ; } statementList ; expr = 
 = = =
@@ -1756,8 +1756,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -1785,8 +1785,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
@@ -1830,8 +1830,8 @@ varOrStatement -> statementList ; expr assignOp variable1 #checkId indiceList
 Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ funcDefList #exit ; } statementList ; expr = 
 = = =
@@ -1902,8 +1902,8 @@ Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId 
 id = value
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; expr assignOp variable1 #checkId EPSILON 
-variable1 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; expr assignOp #exitScope EPSILON 
+variable1 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; expr assignOp #currentScope #exitScope EPSILON 
 assignOp -> = 
 Stack: $ funcDefList #exit ; } statementList ; expr = 
 = = =
@@ -2010,8 +2010,8 @@ factor1 -> factor2 #checkId indiceList
 Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 #checkId indiceList 
 indiceList -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 #checkId EPSILON 
-factor2 -> #exitScope EPSILON 
-Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 #exitScope EPSILON 
+factor2 -> #currentScope #exitScope EPSILON 
+Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 term1 #currentScope #exitScope EPSILON 
 term1 -> EPSILON 
 Stack: $ funcDefList #exit ; } statementList ; ) expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 

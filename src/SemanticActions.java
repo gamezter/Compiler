@@ -16,7 +16,6 @@ public class SemanticActions {
 	
 	Stack<Item> s = new Stack<Item>();
 	Stack<SymbolTable> scope = new Stack<SymbolTable>();
-	int depth = 0;
 	
 	SemanticActions(String fileName, BufferedWriter error) throws IOException{
 		File fSA = new File("symbolTables-" + fileName);
@@ -102,6 +101,7 @@ public class SemanticActions {
 			}else{
 				Symbol v = current.insert(new Symbol(id.lexeme, Symbol.Kind.VARIABLE));
 				v.type.add(new Type(type.lexeme, new ArrayList<Integer>(arraySizeList)));
+				v.parentTable = current;
 				arraySizeList.clear();
 				break;
 			}
@@ -132,9 +132,10 @@ public class SemanticActions {
 				Boolean temp = symbol.type.get(0).type.equals("int");
 				Boolean temp2 = symbol.type.get(0).type.equals("float");
 				if(temp || temp2){
+					scope.pop();
+					scope.push(symbol.parentTable);
 				}else{
-					scope.push(scope.peek().Search(symbol.type.get(0).type).link);
-					depth++;
+					scope.push(scope.pop().Search(symbol.type.get(0).type).link);
 				}
 			}
 			break;
@@ -147,7 +148,10 @@ public class SemanticActions {
 			}else if((func.type.size() - 1) != id.shallowDimensions){
 				error.write("SEMANTIC ERROR: FUNCTION " + id.lexeme + " ON LINE " + id.line + " HAS WRONG NUMBER OF PARAMETERS");error.newLine();
 				break;
-			}else break;
+			}else{
+				scope.pop();
+				scope.push(current);
+			} break;
 		case "#addShallowDimension":
 			s.peek().shallowDimensions++;
 			break;
@@ -156,13 +160,9 @@ public class SemanticActions {
 			break;
 		case "#currentScope":
 			scope.push(current);
-			depth++;
 			break;
 		case "#exitScope":
-			for(int i = 0; i < depth; i++){
-				scope.pop();
-			}
-			depth = 0;
+			scope.pop();
 			break;
 		case "#exit":
 			current = current.getParentTable();

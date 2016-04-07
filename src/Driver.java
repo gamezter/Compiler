@@ -8,15 +8,15 @@ public class Driver {
 	public static void main(String[] args) throws IOException {
 		SyntacticAnalyzer sa = null;
 		try {
-			String fileName = "test.txt";
+			String fileName = "test";
 			
-			File fOutput = new File("output-" + fileName);
+			File fOutput = new File("output-" + fileName + ".txt");
 			BufferedWriter output = new BufferedWriter(new FileWriter(fOutput));
 			
-			File fError = new File("error-" + fileName);
+			File fError = new File("error-" + fileName + ".txt");
 			BufferedWriter error = new BufferedWriter(new FileWriter(fError));
 			
-			sa = new SyntacticAnalyzer(fileName, output, error);
+			sa = new SyntacticAnalyzer(fileName + ".txt", output, error);
 			Boolean result = sa.parse();
 			output.append("Success: " + result);
 			output.newLine();
