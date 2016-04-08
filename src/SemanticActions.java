@@ -92,7 +92,8 @@ public class SemanticActions {
 		case "#newVar":
 			id = s.pop();
 			type = s.pop();
-			if(current.Search(id.lexeme) != null){
+			Symbol existing = current.Search(id.lexeme);
+			if(existing != null && existing.parentTable != current){
 				error.write("SEMANTIC ERROR: VARIABLE " + id.lexeme + " ON LINE " + id.line + " HAS ALREADY BEEN DECLARED");error.newLine();
 				break;
 			}else if((!type.lexeme.equals("int") && !type.lexeme.equals("float") && current.Search(type.lexeme) == null) || current.getParentSymbol().equals(type.lexeme)){
@@ -119,7 +120,35 @@ public class SemanticActions {
 		case "#pushType":
 			s.push(new Item("TYPE", token.lexeme, token.line));
 			break;
-		case "#checkId":
+		case "#pop":
+			s.pop();
+			break;
+		case "#exit":
+			current = current.getParentTable();
+			scope.pop();
+			break;
+		}
+	}
+
+	public void checking(String action, Token token) throws IOException{
+		Item id, type;
+		
+		switch(action){
+		case "%pushId":
+			s.push(new Item("ID", token.lexeme, token.line));
+			break;
+		case "%enter":
+			current = current.Search(s.pop().lexeme).link;
+			scope.push(current);
+			break;
+		case "%exit":
+			current = current.getParentTable();
+			scope.pop();
+			break;
+		case "%pop":
+			s.pop();
+			break;
+		case "%checkId":
 			id = s.pop();
 			Symbol symbol = scope.peek().Search(id.lexeme);
 			if(symbol == null){
@@ -139,7 +168,7 @@ public class SemanticActions {
 				}
 			}
 			break;
-		case "#checkFunc":
+		case "%checkFunc":
 			id = s.pop();
 			Symbol func = scope.peek().Search(id.lexeme);
 			if(func == null){
@@ -152,25 +181,21 @@ public class SemanticActions {
 				scope.pop();
 				scope.push(current);
 			} break;
-		case "#addShallowDimension":
+		case "%addShallowDimension":
 			s.peek().shallowDimensions++;
 			break;
-		case "#addShallowParam":
+		case "%addShallowParam":
 			s.peek().shallowDimensions++;
 			break;
-		case "#currentScope":
+		case "%currentScope":
 			scope.push(current);
 			break;
-		case "#exitScope":
-			scope.pop();
-			break;
-		case "#exit":
-			current = current.getParentTable();
+		case "%exitScope":
 			scope.pop();
 			break;
 		}
 	}
-
+	
 	public void print(SymbolTable st) throws IOException{
 		st.print(symbolTables);
 		for(int i = 0; i < st.getNumberOfSymbols(); i++){

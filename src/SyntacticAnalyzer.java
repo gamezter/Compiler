@@ -13,16 +13,16 @@ public class SyntacticAnalyzer{
 	String[][] stateTransition = {
 	/*prog*/			{"","","","","","","","","","","","","","","","","","","","","","#newGlobal classDeclList progBody","","","","","","","","","","","","#newGlobal classDeclList progBody","","","","pop"},		
 	/*classDeclList*/	{"","","","","","","","","","","","","","","","","","","","","","classDecl classDeclList","","","","","","","","","","","","EPSILON","","","","pop"},
-	/*classDecl*/		{"","","","","","","","","","","","","","","","","","","","","","class #pushId id #newClass { classBody } ; #exit","","","","","","","","","","","","pop","","","","pop"},
-	/*classBody*/		{"","","","","","","","","","","","EPSILON","","","","","","","","","","","","#pushType type #pushId id varOrFunc","","","","#pushType type #pushId id varOrFunc","","#pushType type #pushId id varOrFunc","","","","","","","","pop"},
-	/*varOrFunc*/		{"","#newFunc ( fParams ) funcBody ; #exit funcDefList","","","","","","arraySizeList #newVar ; classBody","arraySizeList #newVar ; classBody","","","pop","","","","","","","","","","","","","","","","","","","","","","","","","","pop"},
+	/*classDecl*/		{"","","","","","","","","","","","","","","","","","","","","","class #pushId %pushId id #newClass %enter { classBody } ; #exit %exit","","","","","","","","","","","","pop","","","","pop"},
+	/*classBody*/		{"","","","","","","","","","","","EPSILON","","","","","","","","","","","","#pushType type #pushId %pushId id varOrFunc","","","","#pushType type #pushId %pushId id varOrFunc","","#pushType type #pushId %pushId id varOrFunc","","","","","","","","pop"},
+	/*varOrFunc*/		{"","#newFunc %enter ( fParams ) funcBody ; #exit %exit funcDefList","","","","","","%pop arraySizeList #newVar ; classBody","%pop arraySizeList #newVar ; classBody","","","pop","","","","","","","","","","","","","","","","","","","","","","","","","","pop"},
 	/*funcDefList*/		{"","","","","","","","","","","","EPSILON","","","","","","","","","","","","funcDef funcDefList","","","","funcDef funcDefList","","funcDef funcDefList","","","","","","","","EPSILON"},
-	/*progBody*/		{"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","program #newProg funcBody ; #exit funcDefList","","","","pop"},
-	/*funcHead*/		{"","","","","","","","","","","pop","","","","","","","","","","","","","#pushType type #pushId id #newFunc ( fParams )","","","","#pushType type #pushId id #newFunc ( fParams )","","#pushType type #pushId id #newFunc ( fParams )","","","","","","","","pop"},
-	/*funcDef*/			{"","","","","","","","","","","","pop","","","","","","","","","","","","funcHead funcBody ; #exit","","","","funcHead funcBody ; #exit","","funcHead funcBody ; #exit","","","","","","","","pop"},
+	/*progBody*/		{"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","%pushId program #newProg %enter funcBody ; #exit %exit funcDefList","","","","pop"},
+	/*funcHead*/		{"","","","","","","","","","","pop","","","","","","","","","","","","","#pushType type #pushId %pushId id #newFunc %enter ( fParams )","","","","#pushType type #pushId %pushId id #newFunc %enter ( fParams )","","#pushType type #pushId %pushId id #newFunc %enter ( fParams )","","","","","","","","pop"},
+	/*funcDef*/			{"","","","","","","","","","","","pop","","","","","","","","","","","","funcHead funcBody ; #exit %exit","","","","funcHead funcBody ; #exit %exit","","funcHead funcBody ; #exit %exit","","","","","","","","pop"},
 	/*funcBody*/		{"","","","","","","","pop","","","{ funcBlock }","pop","","","","","","","","","","","","pop","","","","pop","","pop","","","","","","","","pop"},
-	/*funcBlock*/		{"","","","","","","","","","","","EPSILON","","","","","","","","","","","","#pushType float #pushId id arraySizeList #newVar ; funcBlock","","for ( #pushType type #pushId id #newVar assignOp expr ; relExpr ; assignStat ) statBlock ; statementList","get ( variable ) ; statementList","#pushType id varOrStatement","if ( expr ) then statBlock else statBlock ; statementList","#pushType int #pushId id arraySizeList #newVar ; funcBlock","","","","","put ( expr ) ; statementList","return ( expr ) ; statementList","","pop"},
-	/*varOrStatement*/	{"","","","","","indiceList #checkId variable1 assignOp expr ; statementList","","","indiceList #checkId variable1 assignOp expr ; statementList","","","pop","","","","","indiceList #checkId variable1 assignOp expr ; statementList","","","","","","","","","","","#pushId id arraySizeList #newVar ; funcBlock","","","","","","","","","","pop"},
+	/*funcBlock*/		{"","","","","","","","","","","","EPSILON","","","","","","","","","","","","#pushType float #pushId id arraySizeList #newVar ; funcBlock","","for ( #pushType type #pushId id #newVar assignOp expr ; relExpr ; assignStat ) statBlock ; statementList","get ( variable ) ; statementList","#pushType %pushId id varOrStatement","if ( expr ) then statBlock else statBlock ; statementList","#pushType int #pushId id arraySizeList #newVar ; funcBlock","","","","","put ( expr ) ; statementList","return ( expr ) ; statementList","","pop"},
+	/*varOrStatement*/	{"","","","","","#pop indiceList %checkId variable1 assignOp expr ; statementList","","","#pop indiceList %checkId variable1 assignOp expr ; statementList","","","pop","","","","","#pop indiceList %checkId variable1 assignOp expr ; statementList","","","","","","","","","","","#pushId id arraySizeList #newVar ; funcBlock","","","","","","","","","","pop"},
 	/*statementList*/	{"","","","","","","","","","","","EPSILON","","","","","","","","","","","","","","statement statementList","statement statementList","statement statementList","statement statementList","","","","","","statement statementList","statement statementList","","pop"},
 	/*arraySizeList*/	{"","","EPSILON","","EPSILON","","","EPSILON","arraySize arraySizeList","","","","","","","","","","","","","","","","","","","","","","","","","","","","","pop"},
 	/*statement*/		{"","","","","","","","pop","","","","pop","","","","","","","","","","","pop","","","for ( #pushType type #pushId id #newVar assignOp expr ; relExpr ; assignStat ) statBlock ;","get ( variable ) ;","assignStat ;","if ( expr ) then statBlock else statBlock ;","","","","","","put ( expr ) ;","return ( expr ) ;","","pop"},
@@ -36,21 +36,21 @@ public class SyntacticAnalyzer{
 	/*sign*/			{"-","pop","","","","","","","","","","","+","","","","","","","","","","","","pop","","","pop","","","pop","pop","","","","","","pop"},
 	/*term*/			{"factor term1","factor term1","pop","","pop","","","pop","","pop","","","factor term1","pop","pop","pop","","pop","pop","pop","","","","","factor term1","","","factor term1","","","factor term1","factor term1","pop","","","","","pop"},
 	/*term1*/			{"EPSILON","","EPSILON","multOp factor term1","EPSILON","","multOp factor term1","EPSILON","","EPSILON","","","EPSILON","EPSILON","EPSILON","EPSILON","","EPSILON","EPSILON","EPSILON","multOp factor term1","","","","","","","","","","","","EPSILON","","","","","pop"},
-	/*factor*/			{"sign factor","( arithExpr )","pop","pop","pop","","pop","pop","","pop","","","sign factor","pop","pop","pop","","pop","pop","pop","pop","","","","fnum","","","#pushId id factor1","","","inum","not factor","pop","","","","","pop"},
-	/*factor1*/			{"indiceList #checkId factor2","( #currentScope aParams #exitScope ) #checkFunc","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","","","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","indiceList #checkId factor2","","","","","","","","","","","","indiceList #checkId factor2","","","","","pop"},
-	/*factor2*/			{"EPSILON #exitScope #currentScope","","EPSILON #exitScope #currentScope","EPSILON #exitScope #currentScope","EPSILON #exitScope #currentScope",". #pushId id factor1","EPSILON #exitScope #currentScope","EPSILON #exitScope #currentScope","","EPSILON #exitScope #currentScope","","","EPSILON #exitScope #currentScope","EPSILON #exitScope #currentScope","EPSILON #exitScope #currentScope","EPSILON #exitScope #currentScope","","EPSILON #exitScope #currentScope","EPSILON #exitScope #currentScope","EPSILON #exitScope #currentScope","EPSILON #exitScope #currentScope","","","","","","","","","","","","EPSILON #exitScope #currentScope","","","","","pop"},
-	/*variable*/		{"","","pop","","","","","","","","","","","","","","pop","","","","","","","","","","","#pushId id indiceList #checkId variable1","","","","","","","","","","pop"},
-	/*variable1*/		{"","","EPSILON #exitScope #currentScope","","",". #pushId id indiceList #checkId variable1","","","","","","","","","","","EPSILON #exitScope #currentScope","","","","","","","","","","","","","","","","","","","","","pop"},
+	/*factor*/			{"sign factor","( arithExpr )","pop","pop","pop","","pop","pop","","pop","","","sign factor","pop","pop","pop","","pop","pop","pop","pop","","","","fnum","","","%pushId id factor1","","","inum","not factor","pop","","","","","pop"},
+	/*factor1*/			{"indiceList %checkId factor2","( %currentScope aParams %exitScope ) %checkFunc","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","","","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","indiceList %checkId factor2","","","","","","","","","","","","indiceList %checkId factor2","","","","","pop"},
+	/*factor2*/			{"EPSILON %exitScope %currentScope","","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope",". %pushId id factor1","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","","EPSILON %exitScope %currentScope","","","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","","","","","","","","","","","","EPSILON %exitScope %currentScope","","","","","pop"},
+	/*variable*/		{"","","pop","","","","","","","","","","","","","","pop","","","","","","","","","","","%pushId id indiceList %checkId variable1","","","","","","","","","","pop"},
+	/*variable1*/		{"","","EPSILON %exitScope %currentScope","","",". %pushId id indiceList %checkId variable1","","","","","","","","","","","EPSILON %exitScope %currentScope","","","","","","","","","","","","","","","","","","","","","pop"},
 	/*indiceList*/		{"EPSILON","","EPSILON","EPSILON","EPSILON","EPSILON","EPSILON","EPSILON","indice indiceList","EPSILON","","","EPSILON","EPSILON","EPSILON","EPSILON","EPSILON","EPSILON","EPSILON","EPSILON","EPSILON","","","","","","","","","","","","EPSILON","","","","","pop"},
 	/*indice*/			{"pop","","pop","pop","pop","pop","pop","pop","[ arithExpr #addShallowDimension ]","pop","","","pop","pop","pop","pop","pop","pop","pop","pop","pop","","","","","","","","","","","","pop","","","","","pop"},
 	/*arraySize*/		{"","","pop","","pop","","","pop","[ #addDimension inum ]","","","","","","","","","","","","","","","","","","","","","","","","","","","","","pop"},
 	/*type*/			{"","","","","","","","","","","","","","","","","","","","","","","","float","","","","id","","int","","","","","","","","pop"},
 	/*fParams*/			{"","","EPSILON","","","","","","","","","","","","","","","","","","","","","#pushType type #pushId id arraySizeList #newVar #changeToParam fParamsTailList","","","","#pushType type #pushId id arraySizeList #newVar #changeToParam fParamsTailList","","#pushType type #pushId id arraySizeList #newVar #changeToParam fParamsTailList","","","","","","","","pop"},
 	/*fParamsTailList*/	{"","","EPSILON","","fParamsTail fParamsTailList","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","pop"},
-	/*aParams*/			{"expr #addShallowParam aParamsTailList","expr #addShallowParam aParamsTailList","EPSILON","","","","","","","","","","expr #addShallowParam aParamsTailList","","","","","","","","","","","","expr #addShallowParam aParamsTailList","","","expr #addShallowParam aParamsTailList","","","expr #addShallowParam aParamsTailList","expr #addShallowParam aParamsTailList","","","","","","pop"},
+	/*aParams*/			{"expr %addShallowParam aParamsTailList","expr %addShallowParam aParamsTailList","EPSILON","","","","","","","","","","expr %addShallowParam aParamsTailList","","","","","","","","","","","","expr %addShallowParam aParamsTailList","","","expr %addShallowParam aParamsTailList","","","expr %addShallowParam aParamsTailList","expr %addShallowParam aParamsTailList","","","","","","pop"},
 	/*aParamsTailList*/	{"","","EPSILON","","aParamsTail aParamsTailList","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","pop"},
 	/*fParamsTail*/		{"","","pop","",", #pushType type #pushId id arraySizeList #newVar #changeToParam","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","pop"},
-	/*aParamsTail*/		{"","","pop","",", expr #addShallowParam","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","pop"},
+	/*aParamsTail*/		{"","","pop","",", expr %addShallowParam","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","pop"},
 	/*assignOp*/		{"pop","pop","","","","","","","","","","","pop","","","","=","","","","","","","","pop","","","pop","","","pop","pop","","","","","","pop"},
 	/*relOp*/			{"pop","pop","","","","","","","","","","","pop","<","<=","<>","","==",">",">=","","","","","pop","","","pop","","","pop","pop","","","","","","pop"},
 	/*addOp*/			{"-","pop","","","","","","","","","","","+","","","","","","","","","","","","pop","","","pop","","","pop","pop","or","","","","","pop"},
@@ -84,7 +84,10 @@ public class SyntacticAnalyzer{
 			}else if(x.startsWith("#")){//semantic actions
 				sa.action(x, a);
 				pop();
-			}else{//non-terminal
+			}else if(x.startsWith("%")){//semantic checking, skip
+				pop();
+			}
+			else{//non-terminal
 				String rule = table(a.type, x);
 				if(!rule.isEmpty()){
 					output.append(pop() + " -> ");
@@ -100,12 +103,64 @@ public class SyntacticAnalyzer{
 		if(!a.type.equals(Token.Type.EOF) || error) return false;
 		else{
 			sa.print(sa.global);
-			sa.close();
 			return true;
 		}
 	}
+	Boolean check() throws Exception{
+		Stack<String> cStack = new Stack<String>();
+		Boolean error = false;
+		
+		cStack.push("$");
+		cStack.push("prog");
+		
+		Token a = la.nextProcessedToken();
+		while(!cStack.peek().equals("$")){
+			String x = cStack.peek();
+			if(x.equals("EPSILON"))cStack.pop();
+			else if(isTerminal(x)){
+				if(matches(x,a)){
+					a = la.nextProcessedToken();
+					cStack.pop();
+				}else{// if the top of the stack is a terminal but doesn't match the current token, should pop
+					cStack.pop();
+					error = true;
+				}
+			}else if(x.startsWith("%")){//semantic checking
+				sa.checking(x, a);
+				cStack.pop();
+			}else if(x.startsWith("#")){//semantic action, skip
+				cStack.pop();
+			}else{//non-terminal
+				String rule = table(a.type, x);
+				if(!rule.isEmpty()){
+					cStack.pop();
+					String[] rules = rule.split(" ");
+					for(int i = rules.length -1; i > -1; i--){
+						cStack.push(rules[i]);
+					}
+				}else{// if the table returns an invalid rule
+					String func = table(a.type, x);
+					if(func.equals("pop")){
+						cStack.pop();
+					}else{
+						Token next = a;
+						while(func.isEmpty()){// should always be empty
+							next = la.nextProcessedToken();
+							func = table(next.type, x);
+						}
+						a = next;
+					}
+					error = true;
+				}
+			}
+		}
+		if(!a.type.equals(Token.Type.EOF) || error) return false;
+		else return true;
+	}
+	
 	public void close() throws IOException{
 		la.close();
+		sa.close();
 		output.close();
 		error.close();
 	}
@@ -183,44 +238,16 @@ public class SyntacticAnalyzer{
 	}
 	Boolean isTerminal(String s){
 		switch(s){
-		case "-":
-		case "(":
-		case ")":
-		case "*":
-		case ",":
-		case ".":
-		case "/":
-		case ";":
-		case "[":
-		case "]":
-		case "{":
-		case "}":
-		case "+":
-		case "<":
-		case "<=":
-		case "<>":
-		case "=":
-		case "==":
-		case ">":
-		case ">=":
-		case "and":
-		case "class":
-		case "else":
-		case "float":
-		case "fnum":
-		case "for":
-		case "get":
-		case "id":
-		case "if":
-		case "int":
-		case "inum":
-		case "not":
-		case "or":
-		case "program":
-		case "put":
-		case "return":
-		case "then":
-		case "$": return true;
+		case "-":case "(":case ")":case "*":case ",":
+		case ".":case "/":case ";":case "[":case "]":
+		case "{":case "}":case "+":case "<":case "<=":
+		case "<>":case "=":case "==":case ">":case ">=":
+		case "and":case "class":case "else":case "float":
+		case "fnum":case "for":case "get":case "id":
+		case "if":case "int":case "inum":case "not":
+		case "or":case "program":case "put":
+		case "return":case "then":case "$":
+			return true;
 		default: return false;
 		}
 	}

@@ -1,9 +1,12 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class LexicalAnalyzer {
 
 	BufferedInputStream input;
 	BufferedWriter error;
+	
+	ArrayList<Token> tokens = new ArrayList<Token>();
 	
 	int[][] stateTransition = {	{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},//error row so that all row indices start at 1
 						/*1*/	{ 1, 1, 2, 4, 5,-3,12,16,22,26,27,28,29,30,31,32,38,39,40,41,42,43,-4,-1, 0},
@@ -52,6 +55,8 @@ public class LexicalAnalyzer {
 	
 	int index = 0;
 	int line = 1;
+	
+	int processedTokenIndex = 0;
 	
 	
 	LexicalAnalyzer(String fileName, BufferedWriter error) throws IOException{
@@ -129,9 +134,13 @@ public class LexicalAnalyzer {
 				}
 			}while(token == null);
 			if(token.type == Token.Type.CMT) return nextToken();
-			else return token;
+			else{
+				tokens.add(token);
+				return token;
+			} 
 		}else{
 			Token token = new Token(Token.Type.EOF, "$", index, line);
+			tokens.add(token);
 			return token;
 		}
 		
@@ -196,6 +205,10 @@ public class LexicalAnalyzer {
 		default:
 			return Token.Type.ID;
 		}
+	}
+	
+	Token nextProcessedToken(){
+		return tokens.get(processedTokenIndex++);
 	}
 	
 	void handleError(int e, char c) throws IOException{

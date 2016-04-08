@@ -17,8 +17,11 @@ public class Driver {
 			BufferedWriter error = new BufferedWriter(new FileWriter(fError));
 			
 			sa = new SyntacticAnalyzer(fileName + ".txt", output, error);
-			Boolean result = sa.parse();
-			output.append("Success: " + result);
+			Boolean parsingResult = sa.parse();
+			Boolean checkingResult = sa.check();
+			output.append("Parsing Success: " + parsingResult);
+			output.newLine();
+			output.append("Checking Success: " + checkingResult);
 			output.newLine();
 			sa.close();
 		} catch (Exception e) {
