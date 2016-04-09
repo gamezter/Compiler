@@ -172,6 +172,10 @@ public class SemanticActions {
 				if(symbol.type.get(0).dimensions.size() == id.dimensions.size()){
 					factors.pop();
 					factors.push(new Type(symbol.type.get(0).type, null));
+				}else{
+					factors.pop();
+					factors.push(new Type(symbol.type.get(0).type, new ArrayList<Integer>()));
+					factors.peek().dimensions.add(symbol.type.get(0).dimensions.size() - id.dimensions.size());
 				}
 			}
 			break;
@@ -258,10 +262,23 @@ public class SemanticActions {
 				error.write("SEMANTIC ERROR: FUNCTION " + id.lexeme + " ON LINE " + id.line + " IS UNDEFINED");error.newLine();
 				break;
 			}else{
+				Boolean same = true;
+				for(int i = 0; i < func.type.size() - 1; i++){
+					if(func.type.get(i+1).type.equals(id.dimensions.get(i).type)){
+						if(func.type.get(i+1).dimensions.size() != id.dimensions.get(i).dimensions.size()){
+							same = false;
+							error.write("SEMANTIC ERROR: FUNCTION PARAMETER " + id.dimensions.get(i).type + " ARRAY SIZE DOESNT MATCH FUNCTION SIGNATURE ARRAY SIZE " + func.type.get(i+1).dimensions.size() + " ON LINE " + id.line);error.newLine();
+						}
+					}else{
+						same = false;
+						error.write("SEMANTIC ERROR: FUNCTION PARAMETER " + id.dimensions.get(i).type + " DOESNT MATCH FUNCTION SIGNATURE " + func.type.get(i+1).type + " ON LINE " + id.line);error.newLine();
+					}
+				}if(same){
+					factors.pop();
+					factors.push(func.type.get(0));//push return type
+				}
 				scope.pop();
 				scope.push(current);
-				factors.pop();
-				factors.push(func.type.get(0));//push return type
 			} break;
 		case "%addIndex":
 			Type dimension = factors.pop();
