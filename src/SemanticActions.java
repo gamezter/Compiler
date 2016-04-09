@@ -16,6 +16,7 @@ public class SemanticActions {
 	
 	Stack<Item> s = new Stack<Item>();
 	Stack<SymbolTable> scope = new Stack<SymbolTable>();
+	Stack<Type> factors = new Stack<Type>();
 	
 	SemanticActions(String fileName, BufferedWriter error) throws IOException{
 		File fSA = new File("symbolTables-" + fileName);
@@ -26,7 +27,7 @@ public class SemanticActions {
 	private class Item{
 		String type;// type or id
 		String lexeme;
-		int shallowDimensions;
+		ArrayList<Type> dimensions = new ArrayList<Type>();
 		int line;
 		
 		Item(String type, String lexeme, int line){
@@ -131,7 +132,8 @@ public class SemanticActions {
 	}
 
 	public void checking(String action, Token token) throws IOException{
-		Item id, type;
+		Item id;
+		Type one, two;
 		
 		switch(action){
 		case "%pushId":
@@ -154,7 +156,7 @@ public class SemanticActions {
 			if(symbol == null){
 				error.write("SEMANTIC ERROR: ID " + id.lexeme + " ON LINE " + id.line + " IS UNDECLARED");error.newLine();
 				break;
-			}else if(symbol.type.get(0).dimensions.size() < id.shallowDimensions){
+			}else if(symbol.type.get(0).dimensions.size() < id.dimensions.size()){
 				error.write("SEMANTIC ERROR: ID " + id.lexeme + " ON LINE " + id.line + " HAS WRONG ARRAY SIZE");error.newLine();
 				break;
 			}else{
@@ -166,26 +168,111 @@ public class SemanticActions {
 				}else{
 					scope.push(scope.pop().Search(symbol.type.get(0).type).link);
 				}
+				
+				if(symbol.type.get(0).dimensions.size() == id.dimensions.size()){
+					factors.pop();
+					factors.push(new Type(symbol.type.get(0).type, null));
+				}
 			}
+			break;
+		case "%add":
+			two = factors.pop();
+			one = factors.pop();
+			
+			if(one.dimensions != null && !one.dimensions.isEmpty() || two.dimensions != null && !two.dimensions.isEmpty()){
+				error.write("SEMANTIC ERROR: CANNOT ADD WHOLE ARRAY ON LINE " + token.line);error.newLine();
+				break;
+			}
+			if(two.type.equals(one.type) && (two.type.equals("float") || two.type.equals("int"))){
+				factors.push(new Type(one.type, null));
+			}else if(two.type.equals("int") && one.type.equals("float") || two.type.equals("float") && one.type.equals("int")){
+				error.write("SEMANTIC WARNING: ADDING INT TO FLOAT ON LINE " + token.line);error.newLine();
+				factors.push(new Type("float", null));
+			}else{
+				error.write("SEMANTIC WARNING: ADDING INVALID TYPES ON LINE " + token.line);error.newLine();
+			}
+			break;
+		case "%rel":
+			two = factors.pop();
+			one = factors.pop();
+			
+			if(one.dimensions != null && !one.dimensions.isEmpty() || two.dimensions != null && !two.dimensions.isEmpty()){
+				error.write("SEMANTIC ERROR: CANNOT COMPARE WHOLE ARRAY ON LINE " + token.line);error.newLine();
+				break;
+			}
+			if(two.type.equals(one.type) && (two.type.equals("float") || two.type.equals("int"))){
+				factors.push(new Type("bool", null));
+			}else if(two.type.equals("int") && one.type.equals("float") || two.type.equals("float") && one.type.equals("int")){
+				error.write("SEMANTIC WARNING: COMPARING INT TO FLOAT ON LINE " + token.line);error.newLine();
+				factors.push(new Type("bool", null));
+			}else{
+				error.write("SEMANTIC WARNING: INVALID TYPES ON LINE " + token.line);error.newLine();
+			}
+			break;
+		case "%mul":
+			two = factors.pop();
+			one = factors.pop();
+			
+			if(one.dimensions != null && !one.dimensions.isEmpty() || two.dimensions != null && !two.dimensions.isEmpty()){
+				error.write("SEMANTIC ERROR: CANNOT MULTIPLY WHOLE ARRAY ON LINE " + token.line);error.newLine();
+				break;
+			}
+			if(two.type.equals(one.type)){
+				factors.push(new Type(one.type, null));
+			}else if(two.type.equals("int") && one.type.equals("float") || two.type.equals("float") && one.type.equals("int")){
+				error.write("SEMANTIC WARNING: MULTIPLYING INT TO FLOAT ON LINE " + token.line);error.newLine();
+				factors.push(new Type("float", null));
+			}else{
+				error.write("SEMANTIC WARNING: MULTIPLYING INVALID TYPES ON LINE " + token.line);error.newLine();
+			}
+			break;
+		case "%ass":
+			two = factors.pop();
+			one = factors.pop();
+			
+			if(one.dimensions != null && !one.dimensions.isEmpty() || two.dimensions != null && !two.dimensions.isEmpty()){
+				error.write("SEMANTIC ERROR: CANNOT ASSIGN WHOLE ARRAY ON LINE " + token.line);error.newLine();
+				break;
+			}
+			if(two.type.equals(one.type)){
+				//same type, fine
+			}else if(two.type.equals("int") && one.type.equals("float")){
+				error.write("SEMANTIC WARNING: CASTING INT TO FLOAT ON LINE " + token.line);error.newLine();
+			}else{
+				error.write("SEMANTIC ERROR: LEFT SIDE TYPE: " + one.type + " DOESN'T MATCH RIGHT SIDE TYPE: " + two.type + " ON LINE " + token.line);error.newLine();
+			}
+			break;
+		case "%factorF":
+			factors.add(new Type("float", null));
+			break;
+		case "%factorI":
+			factors.add(new Type("int", null));
+			break;
+		case "%pushDummy":
+			factors.add(new Type(null, null));
 			break;
 		case "%checkFunc":
 			id = s.pop();
-			Symbol func = scope.peek().Search(id.lexeme);
+			Symbol func = scope.peek().Search(id.lexeme, id.dimensions.size());
 			if(func == null){
 				error.write("SEMANTIC ERROR: FUNCTION " + id.lexeme + " ON LINE " + id.line + " IS UNDEFINED");error.newLine();
-				break;
-			}else if((func.type.size() - 1) != id.shallowDimensions){
-				error.write("SEMANTIC ERROR: FUNCTION " + id.lexeme + " ON LINE " + id.line + " HAS WRONG NUMBER OF PARAMETERS");error.newLine();
 				break;
 			}else{
 				scope.pop();
 				scope.push(current);
+				factors.pop();
+				factors.push(func.type.get(0));//push return type
 			} break;
-		case "%addShallowDimension":
-			s.peek().shallowDimensions++;
+		case "%addIndex":
+			Type dimension = factors.pop();
+			if(!dimension.type.equals("int")){
+				error.write("SEMANTIC ERROR: VARIABLE INDEX ON LINE " + token.line + " IS NOT AN INTEGER");error.newLine();
+			}else{
+				s.peek().dimensions.add(dimension);
+			}
 			break;
-		case "%addShallowParam":
-			s.peek().shallowDimensions++;
+		case "%addParam":
+			s.peek().dimensions.add(factors.pop());
 			break;
 		case "%currentScope":
 			scope.push(current);

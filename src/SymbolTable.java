@@ -23,6 +23,19 @@ public class SymbolTable {
 			return null;
 		}
 	}
+	public Symbol Search(String name, int parameters){
+		for(int i = 0; i < symbols.size(); i++){
+			Symbol temp = symbols.get(i);
+			if(name.equals(temp.identifier) && (temp.type.size() - 1) == parameters){
+				return symbols.get(i);
+			}
+		}
+		if(parentSymbol != null){
+			return parentSymbol.parentTable.Search(name, parameters);
+		}else{
+			return null;
+		}
+	}
 	
 	public Symbol insert(Symbol e){
 		symbols.add(e);
