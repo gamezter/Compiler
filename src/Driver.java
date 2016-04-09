@@ -16,7 +16,10 @@ public class Driver {
 			File fError = new File("error-" + fileName + ".txt");
 			BufferedWriter error = new BufferedWriter(new FileWriter(fError));
 			
-			sa = new SyntacticAnalyzer(fileName + ".txt", output, error);
+			File fCode = new File(fileName + ".m");
+			BufferedWriter code = new BufferedWriter(new FileWriter(fCode));
+			
+			sa = new SyntacticAnalyzer(fileName + ".txt", output, error, code);
 			Boolean parsingResult = sa.parse();
 			Boolean checkingResult = sa.check();
 			output.append("Parsing Success: " + parsingResult);

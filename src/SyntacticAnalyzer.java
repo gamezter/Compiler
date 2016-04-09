@@ -6,6 +6,7 @@ public class SyntacticAnalyzer{
 	
 	BufferedWriter output;
 	BufferedWriter error;
+	BufferedWriter code;
 	
 	LexicalAnalyzer la;
 	SemanticActions sa;
@@ -56,11 +57,12 @@ public class SyntacticAnalyzer{
 	/*addOp*/			{"-","pop","","","","","","","","","","","+","","","","","","","","","","","","pop","","","pop","","","pop","pop","or","","","","","pop"},
 	/*multOp*/			{"pop","pop","","*","","","/","","","","","","pop","","","","","","","","and","","","","pop","","","pop","","","pop","pop","","","","","","pop"}};
 	
-	SyntacticAnalyzer(String fileName, BufferedWriter output, BufferedWriter error) throws IOException{
+	SyntacticAnalyzer(String fileName, BufferedWriter output, BufferedWriter error, BufferedWriter code) throws IOException{
 		la = new LexicalAnalyzer(fileName, error);
 		sa = new SemanticActions(fileName, error);
 		this.output = output;
 		this.error = error;
+		this.code = code;
 	}
 	
 	Boolean parse() throws Exception{

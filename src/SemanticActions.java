@@ -25,13 +25,12 @@ public class SemanticActions {
 	}
 	
 	private class Item{
-		String type;// type or id
+		//String type;// type or id
 		String lexeme;
 		ArrayList<Type> dimensions = new ArrayList<Type>();
 		int line;
 		
-		Item(String type, String lexeme, int line){
-			this.type = type;
+		Item(String lexeme, int line){
 			this.lexeme = lexeme;
 			this.line = line;
 		}
@@ -116,10 +115,8 @@ public class SemanticActions {
 			arraySizeList.add(Integer.valueOf(token.lexeme));
 			break;
 		case "#pushId":
-			s.push(new Item("ID", token.lexeme, token.line));
-			break;
 		case "#pushType":
-			s.push(new Item("TYPE", token.lexeme, token.line));
+			s.push(new Item(token.lexeme, token.line));
 			break;
 		case "#pop":
 			s.pop();
@@ -137,7 +134,7 @@ public class SemanticActions {
 		
 		switch(action){
 		case "%pushId":
-			s.push(new Item("ID", token.lexeme, token.line));
+			s.push(new Item(token.lexeme, token.line));
 			break;
 		case "%enter":
 			current = current.Search(s.pop().lexeme).link;
@@ -175,7 +172,10 @@ public class SemanticActions {
 				}else{
 					factors.pop();
 					factors.push(new Type(symbol.type.get(0).type, new ArrayList<Integer>()));
-					factors.peek().dimensions.add(symbol.type.get(0).dimensions.size() - id.dimensions.size());
+					int difference = symbol.type.get(0).dimensions.size() - id.dimensions.size();
+					for(int i = difference; i > 0; i--){
+						factors.peek().dimensions.add(symbol.type.get(0).dimensions.get(i - 1));
+					}
 				}
 			}
 			break;
@@ -265,9 +265,11 @@ public class SemanticActions {
 				Boolean same = true;
 				for(int i = 0; i < func.type.size() - 1; i++){
 					if(func.type.get(i+1).type.equals(id.dimensions.get(i).type)){
-						if(func.type.get(i+1).dimensions.size() != id.dimensions.get(i).dimensions.size()){
-							same = false;
-							error.write("SEMANTIC ERROR: FUNCTION PARAMETER " + id.dimensions.get(i).type + " ARRAY SIZE DOESNT MATCH FUNCTION SIGNATURE ARRAY SIZE " + func.type.get(i+1).dimensions.size() + " ON LINE " + id.line);error.newLine();
+						for(int j = 0; j < func.type.get(i+1).dimensions.size(); j++){
+							if(func.type.get(i+1).dimensions.get(j) != id.dimensions.get(i).dimensions.get(j)){
+								same = false;
+								error.write("SEMANTIC ERROR: FUNCTION PARAMETER " + id.dimensions.get(i).type + " DIMENSIONS DOESNT MATCH FUNCTION SIGNATURE PARAMETER DIMENSIONS " + func.type.get(i+1).dimensions.get(j) + " ON LINE " + id.line);error.newLine();
+							}
 						}
 					}else{
 						same = false;
