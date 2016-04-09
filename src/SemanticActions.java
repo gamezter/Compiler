@@ -247,13 +247,13 @@ public class SemanticActions {
 			}
 			break;
 		case "%factorF":
-			factors.add(new Type("float", null));
+			factors.push(new Type("float", null));
 			break;
 		case "%factorI":
-			factors.add(new Type("int", null));
+			factors.push(new Type("int", null));
 			break;
 		case "%pushDummy":
-			factors.add(new Type(null, null));
+			factors.push(new Type(null, null));
 			break;
 		case "%checkFunc":
 			id = s.pop();
@@ -276,7 +276,7 @@ public class SemanticActions {
 						error.write("SEMANTIC ERROR: FUNCTION PARAMETER " + id.dimensions.get(i).type + " DOESNT MATCH FUNCTION SIGNATURE " + func.type.get(i+1).type + " ON LINE " + id.line);error.newLine();
 					}
 				}if(same){
-					factors.pop();
+					if(!scope.peek().equals(current)) factors.pop();
 					factors.push(func.type.get(0));//push return type
 				}
 				scope.pop();
@@ -292,6 +292,9 @@ public class SemanticActions {
 			break;
 		case "%addParam":
 			s.peek().dimensions.add(factors.pop());
+			break;
+		case "%doneExpr":
+			factors.pop();
 			break;
 		case "%currentScope":
 			scope.push(current);

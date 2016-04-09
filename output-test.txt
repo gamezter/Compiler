@@ -170,66 +170,66 @@ Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } stat
 ; = ;
 statementList -> statementList statement 
 Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList statement 
-statement -> ; statBlock ) assignStat ; relExpr ; expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
+statement -> ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
 for = for
 ( = (
 type -> int 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr assignOp %checkId %pushDummy #newVar id %pushId #pushId int 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId int 
 int = int
 id = idx
 assignOp -> = 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr = 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr = 
 = = =
 expr -> expr1 arithExpr 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 arithExpr 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 term1 factor 
 factor -> %factorI inum 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 arithExpr1 term1 %factorI inum 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 term1 %factorI inum 
 inum = 99
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 EPSILON 
 expr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass EPSILON 
 ; = ;
 relExpr -> %rel arithExpr relOp arithExpr 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor1 id %pushId 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor1 id %pushId 
 id = idx
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp EPSILON 
 relOp -> > 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr > 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr > 
 > = >
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 term1 factor 
 factor -> %factorI inum 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 term1 %factorI inum 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 term1 %factorI inum 
 inum = 0
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel EPSILON 
 ; = ;
 assignStat -> %ass expr assignOp variable 
 Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) %ass expr assignOp variable 
@@ -282,74 +282,74 @@ Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } stat
 { = {
 statementList -> statementList statement 
 Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList statement 
-statement -> ; statBlock else statBlock then ) expr ( if 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr ( if 
+statement -> ; statBlock else statBlock then ) %doneExpr expr ( if 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr ( if 
 if = if
 ( = (
 expr -> expr1 arithExpr 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor1 id %pushId 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor1 id %pushId 
 id = array
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> indiceList indice 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList indice 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList indice 
 indice -> ] %addIndex arithExpr [ 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr [ 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr [ 
 [ = [
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor1 id %pushId 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor1 id %pushId 
 id = idx
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex EPSILON 
 ] = ]
 indiceList -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 EPSILON 
 expr1 -> %rel arithExpr relOp 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr relOp 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr relOp 
 relOp -> > 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr > 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr > 
 > = >
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term1 factor1 id %pushId 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term1 factor1 id %pushId 
 id = maxValue
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel EPSILON 
 ) = )
 then = then
 statBlock -> } statementList { 
@@ -433,31 +433,31 @@ Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } stat
 ; = ;
 statementList -> statementList statement 
 Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList statement 
-statement -> ; ) expr ( return 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr ( return 
+statement -> ; ) %doneExpr expr ( return 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr ( return 
 return = return
 ( = (
 expr -> expr1 arithExpr 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor1 id %pushId 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor1 id %pushId 
 id = maxValue
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 EPSILON 
 expr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr EPSILON 
 ) = )
 ; = ;
 statementList -> EPSILON 
@@ -556,66 +556,66 @@ Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } stat
 ; = ;
 statementList -> statementList statement 
 Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList statement 
-statement -> ; statBlock ) assignStat ; relExpr ; expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
+statement -> ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
 for = for
 ( = (
 type -> int 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr assignOp %checkId %pushDummy #newVar id %pushId #pushId int 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId int 
 int = int
 id = idx
 assignOp -> = 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr = 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr = 
 = = =
 expr -> expr1 arithExpr 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 arithExpr 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 term1 factor 
 factor -> %factorI inum 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 arithExpr1 term1 %factorI inum 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 term1 %factorI inum 
 inum = 1
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; expr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 EPSILON 
 expr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass EPSILON 
 ; = ;
 relExpr -> %rel arithExpr relOp arithExpr 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor1 id %pushId 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor1 id %pushId 
 id = idx
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp EPSILON 
 relOp -> <= 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr <= 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr <= 
 <= = <=
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 term1 factor 
 factor -> %factorI inum 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 term1 %factorI inum 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 term1 %factorI inum 
 inum = 99
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel EPSILON 
 ; = ;
 assignStat -> %ass expr assignOp variable 
 Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; statBlock ) %ass expr assignOp variable 
@@ -680,74 +680,74 @@ Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } stat
 { = {
 statementList -> statementList statement 
 Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList statement 
-statement -> ; statBlock else statBlock then ) expr ( if 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr ( if 
+statement -> ; statBlock else statBlock then ) %doneExpr expr ( if 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr ( if 
 if = if
 ( = (
 expr -> expr1 arithExpr 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor1 id %pushId 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor1 id %pushId 
 id = array
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> indiceList indice 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList indice 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList indice 
 indice -> ] %addIndex arithExpr [ 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr [ 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr [ 
 [ = [
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor1 id %pushId 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor1 id %pushId 
 id = idx
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList ] %addIndex EPSILON 
 ] = ]
 indiceList -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) expr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr expr1 EPSILON 
 expr1 -> %rel arithExpr relOp 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr relOp 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr relOp 
 relOp -> < 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr < 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr < 
 < = <
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term1 factor1 id %pushId 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term1 factor1 id %pushId 
 id = minValue
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %rel EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; } statementList ; statBlock else statBlock then ) %doneExpr %rel EPSILON 
 ) = )
 then = then
 statBlock -> } statementList { 
@@ -831,31 +831,31 @@ Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } stat
 ; = ;
 statementList -> statementList statement 
 Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList statement 
-statement -> ; ) expr ( return 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr ( return 
+statement -> ; ) %doneExpr expr ( return 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr ( return 
 return = return
 ( = (
 expr -> expr1 arithExpr 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor1 id %pushId 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor1 id %pushId 
 id = minValue
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) expr1 EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 EPSILON 
 expr1 -> EPSILON 
-Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) EPSILON 
+Stack: $ progBody classDeclList %exit #exit ; } funcDefList %exit #exit ; } statementList ; ) %doneExpr EPSILON 
 ) = )
 ; = ;
 statementList -> EPSILON 
@@ -955,66 +955,66 @@ inum = 7
 arraySizeList -> EPSILON 
 Stack: $ funcDefList %exit #exit ; } funcBlock ; #newVar EPSILON 
 ; = ;
-funcBlock -> statementList ; statBlock ) assignStat ; relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
+funcBlock -> statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId type #pushType ( for 
 for = for
 ( = (
 type -> int 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId int 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr assignOp %checkId %pushDummy #newVar id %pushId #pushId int 
 int = int
 id = t
 assignOp -> = 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; %ass expr = 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr = 
 = = =
 expr -> expr1 arithExpr 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; %ass expr1 arithExpr 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; %ass expr1 arithExpr1 term 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; %ass expr1 arithExpr1 term1 factor 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 term1 factor 
 factor -> %factorI inum 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; %ass expr1 arithExpr1 term1 %factorI inum 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 term1 %factorI inum 
 inum = 0
 term1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; %ass expr1 arithExpr1 EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; %ass expr1 EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass expr1 EPSILON 
 expr1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; relExpr ; %ass EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr relExpr ; %ass EPSILON 
 ; = ;
 relExpr -> %rel arithExpr relOp arithExpr 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term 
 term -> term1 factor 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor1 id %pushId 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor1 id %pushId 
 id = t
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp arithExpr1 EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr relOp EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr relOp EPSILON 
 relOp -> <= 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr <= 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr <= 
 <= = <=
 arithExpr -> arithExpr1 term 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 term 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 term 
 term -> term1 factor 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 term1 factor 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 term1 factor 
 factor -> %factorI inum 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 term1 %factorI inum 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 term1 %factorI inum 
 inum = 100
 term1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel arithExpr1 EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %rel EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) assignStat ; %doneExpr %rel EPSILON 
 ; = ;
 assignStat -> %ass expr assignOp variable 
 Stack: $ funcDefList %exit #exit ; } statementList ; statBlock ) %ass expr assignOp variable 
@@ -1067,40 +1067,40 @@ Stack: $ funcDefList %exit #exit ; } statementList ; } statementList {
 { = {
 statementList -> statementList statement 
 Stack: $ funcDefList %exit #exit ; } statementList ; } statementList statement 
-statement -> ; ) variable ( get 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable ( get 
+statement -> ; ) %doneExpr variable ( get 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable ( get 
 get = get
 ( = (
 variable -> variable1 %checkId %pushDummy indiceList id %pushId 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy indiceList id %pushId 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy indiceList id %pushId 
 id = sample
 indiceList -> indiceList indice 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy indiceList indice 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy indiceList indice 
 indice -> ] %addIndex arithExpr [ 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr [ 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr [ 
 [ = [
 arithExpr -> arithExpr1 term 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term 
 term -> term1 factor 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor1 id %pushId 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor1 id %pushId 
 id = t
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy indiceList ] %addIndex arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy indiceList ] %addIndex EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy indiceList ] %addIndex EPSILON 
 ] = ]
 indiceList -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) variable1 %checkId %pushDummy EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr variable1 %checkId %pushDummy EPSILON 
 variable1 -> %currentScope %exitScope EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %currentScope %exitScope EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; } statementList ; ) %doneExpr %currentScope %exitScope EPSILON 
 ) = )
 ; = ;
 statementList -> statementList statement 
@@ -1739,60 +1739,60 @@ Stack: $ funcDefList %exit #exit ; } statementList ; %ass EPSILON
 ; = ;
 statementList -> statementList statement 
 Stack: $ funcDefList %exit #exit ; } statementList statement 
-statement -> ; ) expr ( put 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr ( put 
+statement -> ; ) %doneExpr expr ( put 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr ( put 
 put = put
 ( = (
 expr -> expr1 arithExpr 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor1 id %pushId 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor1 id %pushId 
 id = maxValue
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 EPSILON 
 expr1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr EPSILON 
 ) = )
 ; = ;
 statementList -> statementList statement 
 Stack: $ funcDefList %exit #exit ; } statementList statement 
-statement -> ; ) expr ( put 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr ( put 
+statement -> ; ) %doneExpr expr ( put 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr ( put 
 put = put
 ( = (
 expr -> expr1 arithExpr 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor1 id %pushId 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor1 id %pushId 
 id = minValue
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 EPSILON 
 expr1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr EPSILON 
 ) = )
 ; = ;
 statementList -> EPSILON 
@@ -1993,31 +1993,31 @@ Stack: $ funcDefList %exit #exit ; } statementList ; %ass EPSILON
 ; = ;
 statementList -> statementList statement 
 Stack: $ funcDefList %exit #exit ; } statementList statement 
-statement -> ; ) expr ( return 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr ( return 
+statement -> ; ) %doneExpr expr ( return 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr ( return 
 return = return
 ( = (
 expr -> expr1 arithExpr 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr 
 arithExpr -> arithExpr1 term 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term 
 term -> term1 factor 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor 
 factor -> factor1 id %pushId 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor1 id %pushId 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor1 id %pushId 
 id = value
 factor1 -> factor2 %checkId %pushDummy indiceList 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy indiceList 
 indiceList -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 factor2 %checkId %pushDummy EPSILON 
 factor2 -> %currentScope %exitScope EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 term1 %currentScope %exitScope EPSILON 
 term1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 arithExpr1 EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 arithExpr1 EPSILON 
 arithExpr1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) expr1 EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr expr1 EPSILON 
 expr1 -> EPSILON 
-Stack: $ funcDefList %exit #exit ; } statementList ; ) EPSILON 
+Stack: $ funcDefList %exit #exit ; } statementList ; ) %doneExpr EPSILON 
 ) = )
 ; = ;
 statementList -> EPSILON 
