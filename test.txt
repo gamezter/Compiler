@@ -1,5 +1,5 @@
 class Utility{
-	int var1[4][5][7][8][9][1][0];
+	int var1[4][5];
 	float var2;
 	int findMax(int array[100]){
 		int maxValue;
@@ -31,15 +31,15 @@ program {
 	int maxValue;
 	int minValue;
 	Utility utility;
-	Utility arrayUtility[2][3][6][7];
+	//Utility arrayUtility[2][3][6][7];
 	for(int t = 0; t<=100 ; t = t + 1){//this is a comment;
 		get(sample[t]);
 		sample[t] = (sample[t] * randomize());
 	};
 	maxValue = utility.findMax(sample);
 	minValue = utility.findMin(sample);
-	utility.var1[4][1][0][0][0][0][0] = 10;
-	arrayUtility[1][1][1][1].var1[4][1][0][0][0][0][0] = 2;
+	utility.var1[4][1] = 10;
+	//arrayUtility[1][1][1][1].var1[4][1] = 2;
 	put(maxValue);
 	put(minValue);
 };

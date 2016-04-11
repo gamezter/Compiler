@@ -1,45 +1,44 @@
 
 Symbol Table: global
-                Name|                Kind|                         Type|                Link|
---------------------|--------------------|-----------------------------|--------------------|
-             Utility|               CLASS|                             |             Utility|
-             program|            FUNCTION|                        void||             program|
-           randomize|            FUNCTION|                       float||           randomize|
+                Name|               Label|      Kind|      Size|                         Type|                Link|
+--------------------|--------------------|----------|----------|-----------------------------|--------------------|
+             Utility|            Util_C_1|     CLASS|       230|                             |             Utility|
+             program|           prog_F_27|  FUNCTION|       334|                        void||             program|
+           randomize|      glob_rand_F_46|  FUNCTION|         1|                       float||           randomize|
 
 Symbol Table: Utility
-                Name|                Kind|                         Type|                Link|
---------------------|--------------------|-----------------------------|--------------------|
-                var1|            VARIABLE|     int[4][5][7][8][9][1][0]|                    |
-                var2|            VARIABLE|                        float|                    |
-             findMax|            FUNCTION|                 int|int[100]|             findMax|
-             findMin|            FUNCTION|                 int|int[100]|             findMin|
+                Name|               Label|      Kind|      Size|                         Type|                Link|
+--------------------|--------------------|----------|----------|-----------------------------|--------------------|
+                var1|            var1_V_2|  VARIABLE|        25|                    int[4][5]|                    |
+                var2|            var2_V_3|  VARIABLE|         1|                        float|                    |
+             findMax|       Util_find_F_4|  FUNCTION|       102|                 int|int[100]|             findMax|
+             findMin|      Util_find_F_15|  FUNCTION|       102|                 int|int[100]|             findMin|
 
 Symbol Table: findMax
-                Name|                Kind|                         Type|                Link|
---------------------|--------------------|-----------------------------|--------------------|
-               array|           PARAMETER|                     int[100]|                    |
-            maxValue|            VARIABLE|                          int|                    |
-                 idx|            VARIABLE|                          int|                    |
+                Name|               Label|      Kind|      Size|                         Type|                Link|
+--------------------|--------------------|----------|----------|-----------------------------|--------------------|
+               array|            arra_P_4| PARAMETER|       100|                     int[100]|                    |
+            maxValue|            maxV_V_5|  VARIABLE|         1|                          int|                    |
+                 idx|             idx_V_7|  VARIABLE|         1|                          int|                    |
 
 Symbol Table: findMin
-                Name|                Kind|                         Type|                Link|
---------------------|--------------------|-----------------------------|--------------------|
-               array|           PARAMETER|                     int[100]|                    |
-            minValue|            VARIABLE|                          int|                    |
-                 idx|            VARIABLE|                          int|                    |
+                Name|               Label|      Kind|      Size|                         Type|                Link|
+--------------------|--------------------|----------|----------|-----------------------------|--------------------|
+               array|           arra_P_15| PARAMETER|       100|                     int[100]|                    |
+            minValue|           minV_V_16|  VARIABLE|         1|                          int|                    |
+                 idx|            idx_V_18|  VARIABLE|         1|                          int|                    |
 
 Symbol Table: program
-                Name|                Kind|                         Type|                Link|
---------------------|--------------------|-----------------------------|--------------------|
-              sample|            VARIABLE|                     int[100]|                    |
-                 idx|            VARIABLE|                          int|                    |
-            maxValue|            VARIABLE|                          int|                    |
-            minValue|            VARIABLE|                          int|                    |
-             utility|            VARIABLE|                      Utility|                    |
-        arrayUtility|            VARIABLE|          Utility[2][3][6][7]|                    |
-                   t|            VARIABLE|                          int|                    |
+                Name|               Label|      Kind|      Size|                         Type|                Link|
+--------------------|--------------------|----------|----------|-----------------------------|--------------------|
+              sample|           samp_V_28|  VARIABLE|       100|                     int[100]|                    |
+                 idx|            idx_V_30|  VARIABLE|         1|                          int|                    |
+            maxValue|           maxV_V_31|  VARIABLE|         1|                          int|                    |
+            minValue|           minV_V_32|  VARIABLE|         1|                          int|                    |
+             utility|           util_V_33|  VARIABLE|       230|                      Utility|                    |
+                   t|              t_V_35|  VARIABLE|         1|                          int|                    |
 
 Symbol Table: randomize
-                Name|                Kind|                         Type|                Link|
---------------------|--------------------|-----------------------------|--------------------|
-               value|            VARIABLE|                        float|                    |
+                Name|               Label|      Kind|      Size|                         Type|                Link|
+--------------------|--------------------|----------|----------|-----------------------------|--------------------|
+               value|           valu_V_47|  VARIABLE|         1|                        float|                    |

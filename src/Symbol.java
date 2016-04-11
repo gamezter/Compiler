@@ -6,6 +6,8 @@ public class Symbol {
 	public ArrayList<Type> type;
 	public SymbolTable link;
 	public SymbolTable parentTable;
+	public int size;
+	public String label;
 	
 	enum Kind {CLASS, FUNCTION, VARIABLE, PARAMETER};
 	

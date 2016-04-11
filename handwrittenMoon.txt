@@ -1,0 +1,10 @@
+						entry	
+program_sample			res		100
+program_idx				dw		0
+program_maxValue		dw		0
+program_minValue		dw		0
+program_utility			nop
+program_utility_var1	dw		0
+						
+program_t				dw		0
+						getc	r3

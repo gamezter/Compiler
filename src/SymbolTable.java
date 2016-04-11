@@ -67,10 +67,10 @@ public class SymbolTable {
 		else 					bW.write("Symbol Table: global");
 		bW.newLine();
 		
-		bW.write("                Name|                Kind|                         Type|                Link|");bW.newLine();
-		bW.write("--------------------|--------------------|-----------------------------|--------------------|");bW.newLine();
+		bW.write("                Name|               Label|      Kind|      Size|                         Type|                Link|");bW.newLine();
+		bW.write("--------------------|--------------------|----------|----------|-----------------------------|--------------------|");bW.newLine();
 		for(int i = 0; i < symbols.size(); i++){
-			bW.write(String.format("%1$20s", symbols.get(i).identifier) + "|" + String.format("%1$20s", symbols.get(i).kind.toString()) + "|");
+			bW.write(String.format("%1$20s", symbols.get(i).identifier) + "|" + String.format("%1$20s", symbols.get(i).label) + "|" + String.format("%1$10s", symbols.get(i).kind.toString()) + "|" + String.format("%1$10s", symbols.get(i).size) + "|");
 			
 			StringBuilder types = new StringBuilder();
 			int j = 0;

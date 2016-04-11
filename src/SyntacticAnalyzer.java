@@ -6,7 +6,8 @@ public class SyntacticAnalyzer{
 	
 	BufferedWriter output;
 	BufferedWriter error;
-	BufferedWriter code;
+	
+	Boolean entry = false;
 	
 	LexicalAnalyzer la;
 	SemanticActions sa;
@@ -18,7 +19,7 @@ public class SyntacticAnalyzer{
 	/*classBody*/		{"","","","","","","","","","","","EPSILON","","","","","","","","","","","","#pushType type #pushId %pushId id varOrFunc","","","","#pushType type #pushId %pushId id varOrFunc","","#pushType type #pushId %pushId id varOrFunc","","","","","","","","pop"},
 	/*varOrFunc*/		{"","#newFunc %enter ( fParams ) funcBody ; #exit %exit funcDefList","","","","","","%pop arraySizeList #newVar ; classBody","%pop arraySizeList #newVar ; classBody","","","pop","","","","","","","","","","","","","","","","","","","","","","","","","","pop"},
 	/*funcDefList*/		{"","","","","","","","","","","","EPSILON","","","","","","","","","","","","funcDef funcDefList","","","","funcDef funcDefList","","funcDef funcDefList","","","","","","","","EPSILON"},
-	/*progBody*/		{"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","%pushId program #newProg %enter funcBody ; #exit %exit funcDefList","","","","pop"},
+	/*progBody*/		{"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","&enter %pushId program #newProg %enter funcBody ; #exit %exit &exit funcDefList","","","","pop"},
 	/*funcHead*/		{"","","","","","","","","","","pop","","","","","","","","","","","","","#pushType type #pushId %pushId id #newFunc %enter ( fParams )","","","","#pushType type #pushId %pushId id #newFunc %enter ( fParams )","","#pushType type #pushId %pushId id #newFunc %enter ( fParams )","","","","","","","","pop"},
 	/*funcDef*/			{"","","","","","","","","","","","pop","","","","","","","","","","","","funcHead funcBody ; #exit %exit","","","","funcHead funcBody ; #exit %exit","","funcHead funcBody ; #exit %exit","","","","","","","","pop"},
 	/*funcBody*/		{"","","","","","","","pop","","","{ funcBlock }","pop","","","","","","","","","","","","pop","","","","pop","","pop","","","","","","","","pop"},
@@ -37,7 +38,7 @@ public class SyntacticAnalyzer{
 	/*sign*/			{"-","pop","","","","","","","","","","","+","","","","","","","","","","","","pop","","","pop","","","pop","pop","","","","","","pop"},
 	/*term*/			{"factor term1","factor term1","pop","","pop","","","pop","","pop","","","factor term1","pop","pop","pop","","pop","pop","pop","","","","","factor term1","","","factor term1","","","factor term1","factor term1","pop","","","","","pop"},
 	/*term1*/			{"EPSILON","","EPSILON","multOp factor %mul term1","EPSILON","","multOp factor %mul term1","EPSILON","","EPSILON","","","EPSILON","EPSILON","EPSILON","EPSILON","","EPSILON","EPSILON","EPSILON","multOp factor %mul term1","","","","","","","","","","","","EPSILON","","","","","pop"},
-	/*factor*/			{"sign factor","( arithExpr )","pop","pop","pop","","pop","pop","","pop","","","sign factor","pop","pop","pop","","pop","pop","pop","pop","","","","fnum %factorF","","","%pushId id factor1","","","inum %factorI","not factor","pop","","","","","pop"},
+	/*factor*/			{"sign factor","( arithExpr )","pop","pop","pop","","pop","pop","","pop","","","sign factor","pop","pop","pop","","pop","pop","pop","pop","","","","%factorF fnum","","","%pushId id factor1","","","%factorI inum","not factor","pop","","","","","pop"},
 	/*factor1*/			{"indiceList %pushDummy %checkId factor2","( %currentScope aParams %exitScope ) %checkFunc","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","","","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","indiceList %pushDummy %checkId factor2","","","","","","","","","","","","indiceList %pushDummy %checkId factor2","","","","","pop"},
 	/*factor2*/			{"EPSILON %exitScope %currentScope","","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope",". %pushId id factor1","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","","EPSILON %exitScope %currentScope","","","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","EPSILON %exitScope %currentScope","","","","","","","","","","","","EPSILON %exitScope %currentScope","","","","","pop"},
 	/*variable*/		{"","","pop","","","","","","","","","","","","","","pop","","","","","","","","","","","%pushId id indiceList %pushDummy %checkId variable1","","","","","","","","","","pop"},
@@ -59,10 +60,9 @@ public class SyntacticAnalyzer{
 	
 	SyntacticAnalyzer(String fileName, BufferedWriter output, BufferedWriter error, BufferedWriter code) throws IOException{
 		la = new LexicalAnalyzer(fileName, error);
-		sa = new SemanticActions(fileName, error);
+		sa = new SemanticActions(fileName, error, code);
 		this.output = output;
 		this.error = error;
-		this.code = code;
 	}
 	
 	Boolean parse() throws Exception{
@@ -86,7 +86,7 @@ public class SyntacticAnalyzer{
 			}else if(x.startsWith("#")){//semantic actions
 				sa.action(x, a);
 				pop();
-			}else if(x.startsWith("%")){//semantic checking, skip
+			}else if(x.startsWith("%") || x.startsWith("&")){//semantic checking, skip
 				pop();
 			}
 			else{//non-terminal
@@ -131,6 +131,9 @@ public class SyntacticAnalyzer{
 				sa.checking(x, a);
 				cStack.pop();
 			}else if(x.startsWith("#")){//semantic action, skip
+				cStack.pop();
+			}else if(x.startsWith("&")){
+				sa.asm(x);
 				cStack.pop();
 			}else{//non-terminal
 				String rule = table(a.type, x);
